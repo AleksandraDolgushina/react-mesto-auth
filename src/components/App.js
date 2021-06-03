@@ -139,13 +139,13 @@ const App = () => {
             })
             .catch(error => {
                 console.log(error)
+                setIsInfoPopupOpen(true)
+                setPopupStatus(false)
             })
     }
 
     const handleLogOut = () => {
-        setEmail({
-            email: ''
-        })
+        setEmail('')
         setLoggedIn(false)
         localStorage.removeItem('jwt')
     }
@@ -165,25 +165,22 @@ const App = () => {
         }
     }, [loggedIn])
 
-    // React.useEffect( () => {
-    //     checkToken()
-    // }, [])
+    React.useEffect( () => {
+        checkToken()
+    }, [])
 
-    // const checkToken = () => {
-    //     const jwt = localStorage.getItem('jwt')
-    //     if (jwt) {
-    //         auth.getContent(jwt)
-    //         .then( res => {
-    //             setUserData({
-    //                 password: res.data.password, 
-    //                 email: res.data.email
-    //             })
-    //             setLoggedIn(true)
-    //         })
-    //         .catch(error => {
-    //             console.error(error)})
-    //     }
-    // }
+    const checkToken = () => {
+        const jwt = localStorage.getItem('jwt')
+        if (jwt) {
+            auth.getContent(jwt)
+            .then( res => {
+                setEmail(res.data.email)
+                setLoggedIn(true)
+            })
+            .catch(error => {
+                console.error(error)})
+        }
+    }
 
     return (
         <CurrentUserContext.Provider value={currentUser}>
