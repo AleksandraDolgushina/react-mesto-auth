@@ -5,10 +5,10 @@ function PopupWithForm ({title, name, children, buttonText, isOpen, onClose, onS
         <section className={`popup popup_${name} ${isOpen && "popup_opened"}`}>
             <div className="popup__container">
                 <button className="popup__close" type="button" onClick={onClose}></button>     
-                <form className="popup__form" name={`form-${name}`} onSubmit={onSubmit} noValidate>
+                <form className="popup__form" name={`form-${name}`} onSubmit={onSubmit}>
                     <fieldset className="popup__info">
                         <h2 className="popup__title">{title}</h2>{children}                
-                        <button className="popup__save-button popup__save-edit"  type="submit">{buttonText}</button>
+                        <button className="popup__save-button"  type="submit">{buttonText}</button>
                     </fieldset>
                 </form>
 
